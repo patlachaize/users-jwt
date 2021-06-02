@@ -1,16 +1,17 @@
 package ch.es.pl.users;
 
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
-import java.util.Optional;
+import java.util.Date;
 
 @RestController
 public class UserController {
@@ -18,8 +19,8 @@ public class UserController {
     @Autowired
     private UserDAO userDAO;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    @Value("${jwt.secret}")
+    private String secretKey;
 
     @PostMapping(value = "/users")
     public ResponseEntity<Void> addUser(@RequestBody User user) {
@@ -39,7 +40,8 @@ public class UserController {
         if (! user.getPassword().equals(user2.getPassword())) {
             throw new IncorrectLoginException(user.getLogin());
         }
-        String token = jwtTokenUtil.generateToken(user.getLogin());
+        String token = Jwts.builder().setSubject(user.getLogin()).setIssuedAt(new Date())
+                .signWith(SignatureAlgorithm.HS256, secretKey).compact();
         return new ResponseEntity<String>(token, HttpStatus.OK);
     }
 }
