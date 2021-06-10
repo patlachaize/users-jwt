@@ -34,7 +34,7 @@ public class UserController {
         return ResponseEntity.created(uri).build();
     }
 
-    @PostMapping(value="/tokens")
+    @GetMapping(value="/tokens")
     public ResponseEntity<String> requestToken(
             @RequestHeader("login") String login,
             @RequestHeader("password") String password) {
