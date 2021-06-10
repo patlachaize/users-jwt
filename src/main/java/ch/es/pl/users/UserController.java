@@ -35,12 +35,14 @@ public class UserController {
     }
 
     @PostMapping(value="/tokens")
-    public ResponseEntity<String> requestToken(@RequestBody User user) {
-        User user2 = userDAO.findByLogin(user.getLogin());
-        if (! user.getPassword().equals(user2.getPassword())) {
-            throw new IncorrectLoginException(user.getLogin());
+    public ResponseEntity<String> requestToken(
+            @RequestHeader("login") String login,
+            @RequestHeader("password") String password) {
+        User user2 = userDAO.findByLogin(login);
+        if (! password.equals(user2.getPassword())) {
+            throw new IncorrectLoginException(login);
         }
-        String token = Jwts.builder().setSubject(user.getLogin()).setIssuedAt(new Date())
+        String token = Jwts.builder().setSubject(login).setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, secretKey).compact();
         return new ResponseEntity<String>(token, HttpStatus.OK);
     }
