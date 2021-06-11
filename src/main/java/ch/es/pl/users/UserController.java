@@ -39,7 +39,7 @@ public class UserController {
             @RequestHeader("login") String login,
             @RequestHeader("password") String password) {
         User user2 = userDAO.findByLogin(login);
-        if (! password.equals(user2.getPassword())) {
+        if (password == null || ! password.equals(user2.getPassword())) {
             throw new IncorrectLoginException(login);
         }
         String token = Jwts.builder().setSubject(login).setIssuedAt(new Date())
