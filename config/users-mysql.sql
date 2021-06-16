@@ -6,9 +6,10 @@ USE users
 CREATE TABLE users (
     id integer auto_increment,
     login VARCHAR(20) ,
-    password VARCHAR(120),
+    password VARCHAR(20),
     PRIMARY KEY(id)
 );
-insert into users values (1,'Pierre', 'aaa');
-insert into users values (2,'Sophie', 'bbb');
+insert into users values (1,'Jean', 'aaa');
+insert into users values (2,'Sylvie', 'bbb');
+insert into users values (3,'Marc', 'ccc');
 select * from users;
