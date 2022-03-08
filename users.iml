@@ -57,7 +57,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.2.10.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.2.10.RELEASE" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: mysql:mysql-connector-java:8.0.24" level="project" />
-    <orderEntry type="library" name="Maven: com.oracle:ojdbc8:19.3" level="project" />
     <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-ui:1.5.8" level="project" />
     <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-webmvc-core:1.5.8" level="project" />
     <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-common:1.5.8" level="project" />

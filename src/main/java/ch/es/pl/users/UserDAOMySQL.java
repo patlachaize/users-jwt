@@ -14,24 +14,6 @@ import java.sql.Statement;
 @Repository
 public class UserDAOMySQL extends UserDAO {
 
-    public int save(User user) {
-        try {
-            KeyHolder keyHolder = new GeneratedKeyHolder();
-            jdbcTemplate.update(
-                    connection -> {
-                        PreparedStatement ps = connection.prepareStatement(
-                                "insert into users (login,password) values(?,?)",
-                                Statement.RETURN_GENERATED_KEYS);
-                        ps.setString(1, user.getLogin());
-                        ps.setString(2, user.getPassword());
-                        return ps;
-                    },
-                    keyHolder
-            );
-            return keyHolder.getKey().intValue();
-        } catch (DuplicateKeyException e) {
-            throw new DuplicateLoginException(user.getLogin());
-        }
-    }
+
 
 }
